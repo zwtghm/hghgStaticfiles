@@ -1,6 +1,8 @@
 const header = document.querySelector('#header')
 const menuinner = document.querySelector('#menu-inner')
 const menuouter = document.querySelector('#menu-outer')
+const load_mark = document.querySelector('#load_mark')
+const load_p = document.querySelector('#load_mark #load_p')
 const togglemenu_ = document.querySelector('#togglemenu')
 const toggledark_ = document.querySelector('#toggledark')
 const topbtn = document.querySelector('#topbtn')
@@ -8,6 +10,12 @@ const html = document.querySelector('html')
 let n = true, n1 = true, page_
 window.onload = () => {
     console.clear()
+    load_mark.style.opacity = '0'
+    load_p.innerText = '100%'
+    let timeout_l = setTimeout(()=>{
+        load_mark.style.display = 'none'
+        clearTimeout(timeout_l)
+    },400)
     try {
         onload_1()
     } catch {}

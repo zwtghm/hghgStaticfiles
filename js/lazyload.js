@@ -1,8 +1,8 @@
 const io = new IntersectionObserver(items => {
     items.forEach(function(item) {
     var target = item.target
-    if(target.getAttribute('src').indexOf('hghglazy:') != -1 && item.isIntersecting) {
-        target.src = target.src.replace('hghglazy:','')
+    if(target.getAttribute('data-src') !=undefined && item.isIntersecting) {
+        target.src = target.getAttribute('data-src')
         io.unobserve(target)
     }
     })

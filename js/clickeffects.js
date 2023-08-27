@@ -1,6 +1,6 @@
 let cefshow = true
 const cef = () => {
-    const list = ['hello', '你好']
+    const list = list_cef
     let index = 0, index_ = 0
     const randomInteger = (max) => {
         return Math.floor(Math.random() * (max + 1));

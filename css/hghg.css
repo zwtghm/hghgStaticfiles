@@ -4,9 +4,14 @@
 body {
   height: 100%;
   margin: 0;
+  scrollbar-width: none;
   font-family: "noto Sans Sc";
   font-weight: 500;
   background-color: var(--bg-color-2);
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 body * {
@@ -17,7 +22,7 @@ html {
   scroll-behavior: smooth;
   --bg-color: white;
   --text-color-light: #c0c0c0;
-  --text-color-1: #444;
+  --text-color-1: #666;
   --shadow-color: #cccccc;
   --bg-color-1: #ffffffe0;
   --bg-color-2: #f8f8f8;
@@ -35,7 +40,8 @@ html.dark {
 
 .headerlink::before {
   content: '#';
-  opacity: 0;
+  display: inline-block;
+  transform: scale(0);
   margin-right: 6px;
   transition: all 400ms;
   color: var(--color-main)
@@ -47,7 +53,7 @@ html.dark {
 .post_msg h4:hover .headerlink::before,
 .post_msg h5:hover .headerlink::before,
 .post_msg h6:hover .headerlink::before {
-  opacity: 1;
+  transform: scale(1);
 }
 
 kbd {
@@ -57,6 +63,10 @@ kbd {
   padding: 4px;
   border: 1px solid var(--text-color-1);
   box-shadow: 0 0 4px var(--shadow-color);
+}
+
+p {
+  color: var(--text-color-1);
 }
 
 body * {
@@ -252,20 +262,17 @@ pre .hljs-selector-id {
 }
 
 figure {
+  padding: 10px 0 10px 0;
+  border-radius: 10px;
   background-color: var(--bg-color-2);
   width: 100%;
   align-self: center;
-  padding: 10px;
-  border-radius: 10px;
+  overflow-y: visible;
+  overflow-x: scroll;
 }
 
 figure::-webkit-scrollbar {
   display: none;
-}
-
-figure {
-  overflow-y: visible;
-  overflow-x: scroll;
 }
 
 .copybtn {
@@ -293,6 +300,7 @@ table {
 }
 
 figure table {
+  border-radius: 10px;
   background-color: transparent;
 }
 
@@ -324,7 +332,7 @@ figure table tbody {
   display: flex;
   flex-direction: column;
   align-items: start;
-  width: 80%;
+  width: 100%;
 }
 
 .page_g_1 {
@@ -491,10 +499,6 @@ figure table tbody {
   font-size: 18px;
 }
 
-.headerlink:hover {
-  text-decoration: underline solid;
-}
-
 .category-item,
 .archive-item {
   height: 40px;
@@ -556,7 +560,7 @@ img {
 
 .avatar_outer::after {
   position: absolute;
-  right: 20%;
+  right: 24%;
   background-color: var(--bg-color);
   width: 24px;
   font-size: 14px;
@@ -683,9 +687,14 @@ img {
   max-width: 24px;
 }
 
+blockquote {
+  width: 100%;
+  margin: 0 auto;
+}
+
 blockquote p {
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 6px;
 }
 
 blockquote .bdefault {
@@ -756,7 +765,8 @@ blockquote .berror {
 }
 
 .cc {
-  padding: 10px;
+  width: 100%;
+  padding: 10px 0 10px 0;
   border-radius: 10px;
   margin: 10px 0 10px 0;
   background-color: var(--bg-color-2);
@@ -842,6 +852,16 @@ thead+tbody * {
   margin: 10px auto 10px auto;
 }
 
+.gutter pre {
+  text-align: center;
+  padding:0 6px 0 6px;
+}
+
+.inner {
+  width: 96%;
+  margin: 0 auto;
+}
+
 #recent-posts {
   display: grid;
   gap: 16px;
@@ -908,7 +928,9 @@ tbody {
 }
 
 #toc li {
-  margin-left: 10px;
+  margin-left: 20px;
+  width: 94%;  
+  text-align: start;
 }
 
 .ititle {
@@ -937,12 +959,17 @@ tbody {
 
 #toc {
   margin: 0;
-  padding: 0;
+  padding: 10px 0 10px 0;
   display: none;
   right: 0;
   top: 100px;
   z-index: 2;
-  width: 12%;
+  right: 6px;
+  border-radius: 20px;
+  background-color: var(--bg-color-1);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 20px var(--shadow-color);
+  width: 15%;
   position: fixed;
 }
 
@@ -966,7 +993,7 @@ tbody {
 
 #post_msg_inner img {
   min-width: 60%;
-  max-width: 80%;
+  max-width: 100%;
   min-height: 240px;
   max-height: 360px;
   border-radius: 10px;
@@ -1099,6 +1126,16 @@ header {
   box-shadow: 0 0 20px var(--shadow-color);
 }
 
+.bar_tags {
+  max-height: 200px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.bar_tags::-webkit-scrollbar {
+  display: none;
+}
+
 .bar_tags p {
   margin: 6px;
   padding: 0;
@@ -1110,7 +1147,7 @@ header {
   display: none;
   top: 100px;
   z-index: 2;
-  width: 12%;
+  width: 15%;
 }
 
 .bar i {
@@ -1216,8 +1253,11 @@ header {
 }
 
 @media screen and (min-width: 1400px) {
+  figure {
+  border-radius: 10px;
+  }
   .n_3 {
-    width: 74% !important;
+    width: 66% !important;
   }
 
   #post_msg_inner img {
@@ -1236,11 +1276,11 @@ header {
   #bottom-outer,
   #paginator,
   .giscus {
-    width: 74%;
+    width: 66%;
   }
 
   .n_2 {
-    width: 74% !important;
+    width: 66% !important;
   }
 
   .n_1 {

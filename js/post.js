@@ -5,13 +5,13 @@ const fposts = () => {
     const post_msg_inner = document.querySelector('#post_msg_inner')
     const lp = post_msg_inner.innerText.length
     page_ = 'post'
-    const pmenu = toc.querySelectorAll('#toc .toc-text')
-
+    const toc = document.querySelector('#toc')
+    const pmenu = toc.querySelectorAll('.toc-text')
     if (pmenu != null) {
         for (let index = 0; index < pmenu.length; index++) {
             const pmenu_ = pmenu[index]
             const ptitle = document.getElementById(pmenu_.innerText.replaceAll(' ', '-'))
-            list_p.push({ dom_: ptitle, dom: pmenu_.classList })
+            list_p.push({ dom_: ptitle, dom: pmenu_ })
         }
     }
     plen.innerText = lp + '字'

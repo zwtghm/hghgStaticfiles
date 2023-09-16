@@ -24,7 +24,7 @@ html {
   --text-color-light: #c0c0c0;
   --text-color-1: #666;
   --shadow-color: #cccccc;
-  --bg-color-1: #ffffffe0;
+  --bg-color-1: #ffffffed;
   --bg-color-2: #f8f8f8;
   --text-color: #222;
 }
@@ -102,6 +102,7 @@ table * {
 
 figure * {
   margin: 0;
+  font-size: 15px;
   padding: 0;
 }
 
@@ -160,6 +161,7 @@ pre .hljs-string {
   background-color: var(--bg-color-1);
   width: 280px;
   min-height: 280px;
+  border: 1px solid var(--shadow-color);
   box-shadow: 0 0 10px var(--shadow-color);
 }
 
@@ -378,6 +380,7 @@ figure table tbody {
 #bottom-outer {
   display: flex;
   box-shadow: 0 0 20px var(--shadow-color);
+  border: 1px solid var(--shadow-color);
   align-items: center;
   justify-content: center;
   width: 96%;
@@ -389,8 +392,12 @@ figure table tbody {
 
 .header_1 {
   background-color: var(--bg-color-1);
-  box-shadow: 0 0 6px var(--shadow-color);
+  border-bottom: 1px solid var(--shadow-color);
   color: var(--text-color);
+}
+
+.toc-child {
+  display: none;
 }
 
 .header_1 * {
@@ -494,8 +501,11 @@ figure table tbody {
 }
 
 .liactive {
+  filter: blur(0) !important;
+  z-index: 6;
+  position: relative;
   color: var(--color-main) !important;
-  font-weight: 600;
+  font-weight: 600 !important;
   font-size: 18px;
 }
 
@@ -846,6 +856,7 @@ thead+tbody * {
   padding-bottom: 10px;
   border-radius: 20px;
   width: 96%;
+  border: 1px solid var(--shadow-color);
   background-color: var(--bg-color-1);
   min-height: 400px;
   box-shadow: 0 0 20px var(--shadow-color);
@@ -922,13 +933,34 @@ tbody {
 }
 
 #toc * {
-  color: var(--text-color-1);
+  list-style-type: none;
+  color: var(--text-color);
   margin: 0;
   padding: 0;
 }
 
+#toc .toc {
+  width: 96%;
+  margin: 0 auto;
+}
+ 
+.toc-item a span{
+  font-weight: 400;
+  transition: 100ms;
+  filter: blur(2px);
+  color: var(--text-color-1) !important;
+}
+
+.toc:hover span{
+  filter: blur(0);
+  color: var(--text-color);
+}
+
+.toc-item span:hover {
+  color: var(--text-color) !important;
+}
+
 #toc li {
-  margin-left: 20px;
   width: 94%;  
   text-align: start;
 }
@@ -945,6 +977,7 @@ tbody {
   width: 96%;
   display: flex;
   gap: 10px;
+  border: 1px solid var(--shadow-color);
   box-shadow: 0 0 20px var(--shadow-color);
   align-items: center;
   justify-content: center;
@@ -962,13 +995,14 @@ tbody {
   padding: 10px 0 10px 0;
   display: none;
   right: 0;
-  top: 100px;
+  top: 80px;
   z-index: 2;
   right: 6px;
   border-radius: 20px;
   background-color: var(--bg-color-1);
   backdrop-filter: blur(20px);
   box-shadow: 0 0 20px var(--shadow-color);
+  border: 1px solid var(--shadow-color);
   width: 15%;
   position: fixed;
 }
@@ -981,6 +1015,7 @@ tbody {
   display: none;
   width: 40px;
   height: 40px;
+  border: 1px solid var(--shadow-color);
   align-items: center;
   justify-content: center;
   border-radius: 10px;
@@ -1087,6 +1122,7 @@ header {
   user-select: none;
   width: 100%;
   height: 54px;
+  border-bottom: 1px solid transparent;
   z-index: 20;
   position: fixed;
 }
@@ -1124,11 +1160,16 @@ header {
   background-color: var(--bg-color-1);
   border-radius: 20px;
   box-shadow: 0 0 20px var(--shadow-color);
+  border: 1px solid var(--shadow-color);
 }
 
 .bar_tags {
-  max-height: 200px;
+  top: 80px;
+  z-index: 10;
+  position: sticky;
+  max-height: 400px;
   overflow-y: scroll;
+  backdrop-filter: blur(20px);
   scrollbar-width: none;
 }
 
@@ -1142,12 +1183,13 @@ header {
 }
 
 .bar {
-  position: fixed;
+  position: absolute;
   right: 6px;
   display: none;
-  top: 100px;
+  top: 102vh;
   z-index: 2;
   width: 15%;
+  padding-bottom: 20px;
 }
 
 .bar i {
@@ -1189,6 +1231,9 @@ header {
 }
 
 #menu-inner a {
+  font-size: 20px;
+  margin-left: 20px;
+  text-align: start;
   position: relative;
 }
 
@@ -1235,6 +1280,7 @@ header {
   flex-direction: column;
   align-items: center;
   box-shadow: 0 0 20px var(--shadow-color);
+  border: 1px solid var(--shadow-color);
   background-color: var(--bg-color-1);
 }
 
@@ -1300,10 +1346,15 @@ header {
   text-align: center;
   padding: 10px 0 10px 0;
   box-shadow: 0 0 20px var(--shadow-color);
+  border: 1px solid var(--shadow-color);
   background-color: var(--bg-color-1);
 }
 
 @media screen and (min-width: 980px) {
+  #menu-inner a {
+    font-size: 16px !important;
+    margin-left: 0 !important;
+  }
   .n_3 {
     display: flex !important;
   }

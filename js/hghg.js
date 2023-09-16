@@ -12,13 +12,13 @@ window.onload = () => {
     console.clear()
     load_mark.style.opacity = '0'
     load_p.innerText = '100%'
-    let timeout_l = setTimeout(()=>{
+    let timeout_l = setTimeout(() => {
         load_mark.style.display = 'none'
         clearTimeout(timeout_l)
-    },400)
+    }, 400)
     try {
         onload_1()
-    } catch {}
+    } catch { }
     const next = document.getElementsByClassName('next')[0]
     const prev = document.getElementsByClassName('prev')[0]
     if (prev != undefined) {
@@ -28,36 +28,36 @@ window.onload = () => {
         next.innerHTML = '下一页<i class="bi bi-chevron-right"></i>'
     }
 }
-const setCookie =(cname,cvalue,exdays)=>{
+const setCookie = (cname, cvalue, exdays) => {
     var d = new Date();
     if (exdays == null) {
-        document.cookie = cname+"="+cvalue+";path=/;SameSite=Lax;"
+        document.cookie = cname + "=" + cvalue + ";path=/;SameSite=Lax;"
     } else {
-    d.setTime(d.getTime()+(exdays*24*60*60*1000));
-    var expires = "expires="+d.toGMTString();
-    document.cookie = cname+"="+cvalue+"; "+expires+";path=/;SameSite=Lax;";
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toGMTString();
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path=/;SameSite=Lax;";
     }
 }
-const getCookie = (cname) =>{
+const getCookie = (cname) => {
     var name = cname + "=";
     var ca = document.cookie.split(';');
-    for(var i=0; i<ca.length; i++) {
+    for (var i = 0; i < ca.length; i++) {
         var c = ca[i].trim();
-        if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
+        if (c.indexOf(name) == 0) { return c.substring(name.length, c.length); }
     }
     return "";
 }
 const dark = () => {
     toggledark_.classList.add('bi-sun')
     toggledark_.classList.remove('bi-moon')
-    setCookie('mode','dark',null)
+    setCookie('mode', 'dark', null)
     html.classList.add('dark')
     n1 = false
 }
 const light = () => {
     toggledark_.classList.remove('bi-sun')
     toggledark_.classList.add('bi-moon')
-    setCookie('mode','light',null)
+    setCookie('mode', 'light', null)
     html.classList.remove('dark')
     n1 = true
 }
@@ -83,14 +83,33 @@ window.matchMedia('(prefers-color-scheme: dark)')
         }
     })
 
-    if (getCookie('mode')=='dark') {
-        dark()
-    } else {
-        light()
-    }
+if (getCookie('mode') == 'dark') {
+    dark()
+} else {
+    light()
+}
 
 const togglemenu = () => {
     if (n) {
+        togglemenu_.style.transform = 'scale(1,0.2)'
+        let tm = setTimeout(() => {
+            togglemenu_.style.transform = 'scale(1)'
+            clearTimeout(tm)
+        }, 400)
+        const mia = document.querySelectorAll('#menu-inner a')
+        for (let index = 0; index < mia.length; index++) {
+            const mia_ = mia[index]
+            mia_.style.opacity = '0'
+        }
+        let i = 0, ival = setInterval(() => {
+            if (i < mia.length) {
+                i = i + 1
+                const mia_ = mia[i - 1]
+                mia_.style.opacity = '1'
+            } else {
+                clearInterval(ival)
+            }
+        }, 200)
         header.style.height = '100%'
         header.style.backdropFilter = bf
         menuinner.style.display = 'flex'
@@ -99,6 +118,11 @@ const togglemenu = () => {
         togglemenu_.classList.remove('bi-list')
         n = false
     } else {
+        togglemenu_.style.transform = 'scale(1,0.1)'
+        let tm = setTimeout(() => {
+            togglemenu_.style.transform = 'scale(1)'
+            clearTimeout(tm)
+        }, 400)
         togglemenu_.classList.remove('bi-x-lg')
         togglemenu_.classList.add('bi-list')
         header.style.height = '54px'
@@ -133,11 +157,38 @@ window.onscroll = () => {
                     const element = list_p[index]
                     let pdt = Math.round(element.dom_.getBoundingClientRect().top)
                     if (list_p[index - 1] != undefined && pdt >= 0 && pdt < pdt - Math.round(list_p[index - 1].dom_.getBoundingClientRect().top)) {
-                        element.dom.add('liactive')
+                        const toc_child = element.dom.parentNode.parentNode
+                        let toc_child_ = toc_child.querySelector('ol .toc-child')
+                        if (toc_child != null && toc_child_ != null) {
+                            toc_child_.style.display = 'block'
+                        } else if (toc_child != null && toc_child_ == null) {
+                            toc_child_ = toc_child.parentNode
+                            if (toc_child != null && toc_child_ != null) {
+                                toc_child_.style.display = 'block'
+                            } else if (toc_child != null && toc_child_ == null) {
+                                toc_child_ = toc_child.parentNode
+                                toc_child_.style.display = 'block'
+                            }
+                            toc_child_.style.display = 'block'
+                        }
+                        element.dom.classList.add('liactive')
                     } else if (list_p[index - 1] == undefined && pdt >= 0) {
-                        element.dom.add('liactive')
+                        const toc_child = element.dom.parentNode.parentNode
+                        let toc_child_ = toc_child.querySelector('ol .toc-child')
+                        if (toc_child != null && toc_child_ != null) {
+                            toc_child_.style.display = 'block'
+                        } else if (toc_child != null && toc_child_ == null) {
+                            toc_child_ = toc_child.parentNode
+                            toc_child_.style.display = 'block'
+                        }
+                        element.dom.classList.add('liactive')
                     } else {
-                        element.dom.remove('liactive')
+                        const toc_child = element.dom.parentNode.parentNode
+                        let toc_child_ = toc_child.querySelector('ol .toc-child')
+                        if (toc_child != null && toc_child_ != null) {
+                            toc_child_.style.display = 'none'
+                        }
+                        element.dom.classList.remove('liactive')
                     }
                 }
             }
@@ -151,6 +202,7 @@ window.onscroll = () => {
         }
         t_scrollTop = scrollTop_
         if (l_scrollTop < t_scrollTop) {
+            document.querySelector('#search').style.transform = 'scale(0)'
             header.style.height = '0'
         } else {
             header.style.height = '54px'
